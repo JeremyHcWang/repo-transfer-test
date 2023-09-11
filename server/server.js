@@ -13,8 +13,8 @@ app.use(express.json());
 // 1. get request to get 10 latest queries from our SQL Db
 // 2. get request to get a specific query from our SQL DB
 
-app.use('/user', clientRouter);
-app.use('/log', logRouter);
+app.use('/api/user', clientRouter);
+app.use('/api/log', logRouter);
 
 app.use('*', (req, res) => res.status(404).send('Not Found'));
 
