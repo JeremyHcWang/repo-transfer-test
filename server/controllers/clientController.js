@@ -11,23 +11,22 @@ userController.signup = async (req, res, next) => {
     const { username, password, email } = req.body;
     //console.log('in the signup');
     let hashedPassword = await bcrypt.hash(password, salt);
-    console.log('hash', hashedPassword)
+    console.log('hash', hashedPassword);
     console.log('username', username);
     const usernameQuery = `SELECT * FROM clients WHERE username = '${username}'`;
     const emailQuery = `SELECT * FROM clients WHERE email = '${email}';`;
     const usernameResult = await db.query(usernameQuery);
 
     const emailResult = await db.query(emailQuery);
- 
 
     if (emailResult.row) {
       res.locals.newClient = { message: 'Email already in use' };
     } else if (usernameResult.row) {
       res.locals.newClient = { message: 'Username already exist' };
     } else {
-      const createQuery = `INSERT INTO clients ( username, password, email) VALUES ('${username}','${hashedPassword}','${email}');`
+      const createQuery = `INSERT INTO clients ( username, password, email) VALUES ('${username}','${hashedPassword}','${email}');`;
       const create = await db.query(createQuery);
-      console.log('creating new client',create);
+      console.log('creating new client', create);
       res.locals.newClient = { message: 'Client created' };
     }
     return next();
@@ -45,13 +44,22 @@ userController.login = async (req, res, next) => {
     const clientID = passwordResult.rows[0].client_id;
     console.log('passwordResult', passwordResult.rows[0].password);
 
-    const verified = await bcrypt.compare(password, passwordResult.rows[0].password);
+    const verified = await bcrypt.compare(
+      password,
+      passwordResult.rows[0].password
+    );
 
     if (!verified) {
-      res.locals.result = {verified: verified, message: "You do not have access, please try again"}
+      res.locals.result = {
+        verified: verified,
+        message: 'You do not have access, please try again',
+      };
     } else {
-      const jwtToken = jwt.sign({client_id: clientID}, process.env.TOKEN_SECRET);
-      res.locals.result = {verified: verified, message: "login successfully"}
+      const jwtToken = jwt.sign(
+        { client_id: clientID },
+        process.env.TOKEN_SECRET
+      );
+      res.locals.result = { verified: verified, message: 'login successfully' };
     }
     return next();
   } catch (err) {
@@ -59,17 +67,14 @@ userController.login = async (req, res, next) => {
   }
 };
 
-userController.verify = async (req, res, next) => {
-
-}
-
+userController.verify = async (req, res, next) => {};
 
 // userController.createInstance = async (req, res, next) => {
 //   try {
 //     const {label}
 //     const token = crypto.randomUUID();
 //     const hashedToken = await bcrypt.hash(token, salt)
-//     const instanceQuery = 
+//     const instanceQuery =
 //   }
 //   catch {
 
