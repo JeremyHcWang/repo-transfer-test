@@ -1,16 +1,16 @@
-import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import DashboardImage from "../../assets/Dashboard.png";
-import { useNavigate } from "react-router-dom";
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import DashboardImage from '../../assets/Dashboard.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function Signup() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  const navigate = useNavigate("");
+  const navigate = useNavigate('');
 
   const getEmail = (e) => {
     const email = e.target.value;
@@ -31,10 +31,10 @@ export default function Signup() {
   };
 
   const signup = async () => {
-    const response = await fetch("/api/user/signup", {
-      method: "POST",
+    const response = await fetch('/api/user/signup', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify({
         email: email,
@@ -42,127 +42,129 @@ export default function Signup() {
         password: password,
       }),
     });
-
+    const data = await response.json();
+    console.log(data);
+    navigate('/login');
     console.log(response);
   };
 
   return (
     <>
-      <div className="min-h full flex flex-col">
-        <div className="flex flex-col flex-1 bg-scale-100">
-          <div className="absolute top-0 w-full px-8 pt-6 mx-auto">
-            <nav className="relative flex justify-between">
+      <div className='min-h full flex flex-col'>
+        <div className='flex flex-col flex-1 bg-scale-100'>
+          <div className='absolute top-0 w-full px-8 pt-6 mx-auto'>
+            <nav className='relative flex justify-between'>
               <div>Ciphyr</div>
               <div>dark mode</div>
             </nav>
           </div>
-          <div className="flex flex-1">
-            <main className="flex flex-col flex-shrink-0 items-center border-r border-slate-200 w-2/5 h-screen px-5 pt-16 shadow-lg">
-              <section className="flex-1 flex flex-col justify-center w-2/3">
+          <div className='flex flex-1'>
+            <main className='flex flex-col flex-shrink-0 items-center border-r border-slate-200 w-2/5 h-screen px-5 pt-16 shadow-lg'>
+              <section className='flex-1 flex flex-col justify-center w-2/3'>
                 <div>
-                  <h1 className="text-3xl text-slate-800 mb-2">Get Started</h1>
-                  <h2 className="text-l text-slate-500">
+                  <h1 className='text-3xl text-slate-800 mb-2'>Get Started</h1>
+                  <h2 className='text-l text-slate-500'>
                     Create a new account
                   </h2>
                 </div>
-                <div className="flex flex-col gap-5">
-                  <button className="flex items-center justify-center border border-slate-300 rounded-md my-5 py-2 px-4 hover:bg-slate-100">
+                <div className='flex flex-col gap-5'>
+                  <button className='flex items-center justify-center border border-slate-300 rounded-md my-5 py-2 px-4 hover:bg-slate-100'>
                     <FontAwesomeIcon
-                      className="mr-2"
+                      className='mr-2'
                       icon={faGithub}
-                      style={{ color: "#000000" }}
+                      style={{ color: '#000000' }}
                     />
-                    <span className="border-slate-200 ">
+                    <span className='border-slate-200 '>
                       Continue with GitHub
                     </span>
                   </button>
                 </div>
-                <div id="orLine" className="relative mb-12">
-                  <div className="absolute inset-0 flex items-center">
-                    <div className="w-1/2 border-t border-scale-00"></div>
-                    <div className="relative flex justify-center text-sm">
-                      <span className="px-2 text-sm bg-scale-200 text-scale-1200">
+                <div id='orLine' className='relative mb-12'>
+                  <div className='absolute inset-0 flex items-center'>
+                    <div className='w-1/2 border-t border-scale-00'></div>
+                    <div className='relative flex justify-center text-sm'>
+                      <span className='px-2 text-sm bg-scale-200 text-scale-1200'>
                         or
                       </span>
                     </div>
-                    <div className="w-1/2 border-t border-scale-00"></div>
+                    <div className='w-1/2 border-t border-scale-00'></div>
                   </div>
                 </div>
-                <div className="flex flex-col gap-5 mb-8" id="logIn">
+                <div className='flex flex-col gap-5 mb-8' id='logIn'>
                   <div>
-                    <div className="flex flex-row space-x-2 justify-between">
+                    <div className='flex flex-row space-x-2 justify-between'>
                       <label
-                        className="text-sm mb-1 text-slate-500"
-                        htmlFor="email"
+                        className='text-sm mb-1 text-slate-500'
+                        htmlFor='email'
                       >
                         Email
                       </label>
                     </div>
-                    <div id="email" className="mb-4">
+                    <div id='email' className='mb-4'>
                       <input
-                        id="email"
+                        id='email'
                         onChange={getEmail}
-                        className="border-2 rounded-md px-4 py-2 block w-full placeholder:text-xs"
-                        type="text"
-                        placeholder="you@example.com"
+                        className='border-2 rounded-md px-4 py-2 block w-full placeholder:text-xs'
+                        type='text'
+                        placeholder='you@example.com'
                       />
                     </div>
 
-                    <div className="flex flex-row space-x-2 justify-between">
+                    <div className='flex flex-row space-x-2 justify-between'>
                       <label
-                        className="text-sm mb-1 text-slate-500"
-                        htmlFor="email"
+                        className='text-sm mb-1 text-slate-500'
+                        htmlFor='email'
                       >
                         Email
                       </label>
                     </div>
-                    <div id="email" className="mb-4">
+                    <div id='email' className='mb-4'>
                       <input
-                        id="email"
+                        id='email'
                         onChange={getEmail}
-                        className="border-2 rounded-md px-4 py-2 block w-full placeholder:text-xs"
-                        type="text"
-                        placeholder="you@example.com"
+                        className='border-2 rounded-md px-4 py-2 block w-full placeholder:text-xs'
+                        type='text'
+                        placeholder='you@example.com'
                       />
                     </div>
 
-                    <div className="flex flex-row space-x-2 justify-between">
+                    <div className='flex flex-row space-x-2 justify-between'>
                       <label
-                        className="text-sm mb-1 text-slate-500"
-                        htmlFor="Password"
+                        className='text-sm mb-1 text-slate-500'
+                        htmlFor='Password'
                       >
                         Password
                       </label>
                     </div>
                     <input
-                      id="Password"
+                      id='Password'
                       onChange={getPassword}
-                      className="border-2 rounded-md px-4 py-2 block w-full placeholder:text-xs"
-                      type="password"
-                      placeholder="●●●●●●●"
+                      className='border-2 rounded-md px-4 py-2 block w-full placeholder:text-xs'
+                      type='password'
+                      placeholder='●●●●●●●'
                     />
                   </div>
                 </div>
                 <div>
                   <button
                     onClick={signup}
-                    className="text-white p-2 w-full rounded-md bg-sky-600 hover:bg-sky-700 mb-4"
+                    className='text-white p-2 w-full rounded-md bg-sky-600 hover:bg-sky-700 mb-4'
                   >
                     Sign Up
                   </button>
                 </div>
-                <div className="self-center">
+                <div className='self-center'>
                   <div>
-                    <span className="text-scale-1000">Have an account?</span>
+                    <span className='text-scale-1000'>Have an account?</span>
                     <a
-                      className="ml-2 underline transition text-slate-400 hover:text-slate-300"
-                      onClick={() => navigate("/login")}
+                      className='ml-2 underline transition text-slate-400 hover:text-slate-300'
+                      onClick={() => navigate('/login')}
                     >
-                      {"Sign In Now"}
+                      {'Sign In Now'}
                     </a>
                   </div>
                 </div>
-                <div className="mt-20rem flex flex-col bottom-0 text-center text-xs text-slate-500 italic">
+                <div className='mt-20rem flex flex-col bottom-0 text-center text-xs text-slate-500 italic'>
                   <p>
                     By continuing, you agree to Ciphyer's Terms of Service and
                     Privacy Policy, and to receive periodic emails with updates.
@@ -170,9 +172,9 @@ export default function Signup() {
                 </div>
               </section>
             </main>
-            <aside className="flex items-center justify-center w-3/4">
-              <div className="w-2/3">
-                <img src={DashboardImage} alt="Dashboard" />
+            <aside className='flex items-center justify-center w-3/4'>
+              <div className='w-2/3'>
+                <img src={DashboardImage} alt='Dashboard' />
               </div>
             </aside>
           </div>
