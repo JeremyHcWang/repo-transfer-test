@@ -16,13 +16,14 @@ CREATE TABLE clients (
   auth_token INT
 )
 
-CREATE TABLE Log (
+CREATE TABLE log (
   id SERIAL PRIMARY KEY,
   operation VARCHAR(255),
   query_name VARCHAR(255),
   log TEXT,
   raw TEXT,
   depth INT,
+  latency INT,
   api_key VARCHAR(255) NOT NULL,
   FOREIGN KEY (api_key) REFERENCES instance (api_key),
   timestamp TIMESTAMP default NOW()

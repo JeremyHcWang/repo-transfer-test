@@ -1,10 +1,13 @@
-const userController = {};
 const bcrypt = require('bcrypt');
 const db = require('../db');
 const salt = 10;
 const jwt = require('jsonwebtoken');
-const crypto = require('crypto');
 
+<<<<<<< HEAD:server/controllers/clientController.js
+=======
+const userController = {};
+
+>>>>>>> 278877e9da30ad478f53f38fd36c57b34bae22c9:server/controllers/userController.js
 userController.signup = async (req, res, next) => {
   try {
     const { username, password, email } = req.body;
@@ -60,8 +63,12 @@ userController.login = async (req, res, next) => {
       );
 
       res.cookie('token', jwtToken, { httpOnly: true, secure: true });
+<<<<<<< HEAD:server/controllers/clientController.js
       //res.locals.result = {verified: verified, message: "login successfully", jwt: jwtToken}
       res.locals.result = { verified: verified, message: 'login successfully' };
+=======
+      res.locals.result = {verified: verified, message: "login successfully"}
+>>>>>>> 278877e9da30ad478f53f38fd36c57b34bae22c9:server/controllers/userController.js
     }
     return next();
   } catch (err) {
@@ -69,6 +76,7 @@ userController.login = async (req, res, next) => {
   }
 };
 
+<<<<<<< HEAD:server/controllers/clientController.js
 // Entension: save JWT in cookie(http only) and access it from there
 
 userController.verifyToken = async (req, res, next) => {
@@ -121,4 +129,6 @@ userController.createInstance = async (req, res, next) => {
   }
 };
 
+=======
+>>>>>>> 278877e9da30ad478f53f38fd36c57b34bae22c9:server/controllers/userController.js
 module.exports = userController;

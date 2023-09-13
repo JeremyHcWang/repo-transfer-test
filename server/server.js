@@ -1,23 +1,26 @@
 const express = require('express');
+<<<<<<< HEAD
 // import express from 'express';
 const port = process.env.PORT || 4000;
+=======
+const port = process.env.PORT || 3000;
+>>>>>>> 278877e9da30ad478f53f38fd36c57b34bae22c9
 const app = express();
-const clientRouter = require('./routes/clientRouter');
+const clientRouter = require('./routes/userRouter');
+const instanceRouter = require('./routes/instanceRouter')
 const logRouter = require('./routes/logRouter');
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
-// import clientRouter from './routes/clientRouter.js';
 
 app.use(express.json());
 app.use(cookieParser());
 app.use(cors());
 
-// TASKS FOR BACKEND
-
 // 1. get request to get 10 latest queries from our SQL Db
 // 2. get request to get a specific query from our SQL DB
 
 app.use('/api/user', clientRouter);
+app.use('/api/instance', instanceRouter);
 app.use('/api/log', logRouter);
 
 app.use('*', (req, res) => res.status(404).send('Not Found'));
