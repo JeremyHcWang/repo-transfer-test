@@ -1,10 +1,5 @@
 const express = require('express');
-<<<<<<< HEAD
-// import express from 'express';
-const port = process.env.PORT || 4000;
-=======
 const port = process.env.PORT || 3000;
->>>>>>> 278877e9da30ad478f53f38fd36c57b34bae22c9
 const app = express();
 const clientRouter = require('./routes/userRouter');
 const instanceRouter = require('./routes/instanceRouter')

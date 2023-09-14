@@ -3,11 +3,6 @@ const db = require('../db');
 const salt = 10;
 const jwt = require('jsonwebtoken');
 
-<<<<<<< HEAD:server/controllers/clientController.js
-=======
-const userController = {};
-
->>>>>>> 278877e9da30ad478f53f38fd36c57b34bae22c9:server/controllers/userController.js
 userController.signup = async (req, res, next) => {
   try {
     const { username, password, email } = req.body;
@@ -63,12 +58,7 @@ userController.login = async (req, res, next) => {
       );
 
       res.cookie('token', jwtToken, { httpOnly: true, secure: true });
-<<<<<<< HEAD:server/controllers/clientController.js
-      //res.locals.result = {verified: verified, message: "login successfully", jwt: jwtToken}
-      res.locals.result = { verified: verified, message: 'login successfully' };
-=======
       res.locals.result = {verified: verified, message: "login successfully"}
->>>>>>> 278877e9da30ad478f53f38fd36c57b34bae22c9:server/controllers/userController.js
     }
     return next();
   } catch (err) {
@@ -76,59 +66,4 @@ userController.login = async (req, res, next) => {
   }
 };
 
-<<<<<<< HEAD:server/controllers/clientController.js
-// Entension: save JWT in cookie(http only) and access it from there
-
-userController.verifyToken = async (req, res, next) => {
-  // const authHeader = req.headers['authorization']
-  // const token = authHeader && authHeader.split(' ')[1]
-
-  // if (token == null) return res.sendStatus(401)
-
-  const token = req.cookies.token;
-  // const token = res.locals.result.jwt;
-  jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
-    console.log(err);
-
-    // how to use the status code properly?
-    if (err) return res.sendStatus(403);
-
-    res.locals.client = user;
-    console.log('res locals jwt payload', res.locals.client);
-    return next();
-  });
-};
-
-userController.createInstance = async (req, res, next) => {
-  try {
-    const { label } = req.body;
-    if (!label) {
-      res.locals.instance = { message: 'Label required' };
-      return next();
-    } else {
-      const labelQuery = `SELECT * FROM instance WHERE label = '${label}'`;
-      const labelTaken = await db.query(labelQuery);
-      // if table is not empty, then check if label is duplicated
-      if (labelTaken.rowCount !== 0) {
-        if (labelTaken.rows[0].label === label) {
-          res.locals.instance = { message: 'Please use new label' };
-          return next();
-        }
-      }
-    }
-    const id = res.locals.client.client_id;
-    const apiKey = crypto.randomUUID();
-    //const hashedToken = await bcrypt.hash(token, salt)
-    const instanceQuery = `INSERT INTO instance (label, api_key, client_id) VALUES ( '${label}', '${apiKey}','${id}')`;
-    const newInstance = await db.query(instanceQuery);
-    res.locals.instance = { message: 'New instance created' };
-    // add: send back the api key when created
-    return next();
-  } catch (err) {
-    return next(err);
-  }
-};
-
-=======
->>>>>>> 278877e9da30ad478f53f38fd36c57b34bae22c9:server/controllers/userController.js
 module.exports = userController;
